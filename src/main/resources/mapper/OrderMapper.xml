@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hzit.dao.OrderMapper" >
+  <resultMap id="BaseResultMap" type="com.hzit.pojo.Order" >
+    <id column="order_no" property="orderNo" jdbcType="VARCHAR" />
+    <result column="user_id" property="userId" jdbcType="VARCHAR" />
+    <result column="rec_name" property="recName" jdbcType="VARCHAR" />
+    <result column="rec_addr" property="recAddr" jdbcType="VARCHAR" />
+    <result column="rec_phone" property="recPhone" jdbcType="VARCHAR" />
+    <result column="post_age" property="postAge" jdbcType="VARCHAR" />
+    <result column="price" property="price" jdbcType="DOUBLE" />
+    <result column="create_time" property="createTime" jdbcType="DATE" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    order_no, user_id, rec_name, rec_addr, rec_phone, post_age, price, create_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_order
+    where order_no = #{orderNo,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from t_order
+    where order_no = #{orderNo,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.hzit.pojo.Order" >
+    insert into t_order (order_no, user_id, rec_name, 
+      rec_addr, rec_phone, post_age, 
+      price, create_time)
+    values (#{orderNo,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, #{recName,jdbcType=VARCHAR}, 
+      #{recAddr,jdbcType=VARCHAR}, #{recPhone,jdbcType=VARCHAR}, #{postAge,jdbcType=VARCHAR}, 
+      #{price,jdbcType=DOUBLE}, #{createTime,jdbcType=DATE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.hzit.pojo.Order" >
+    insert into t_order
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="orderNo != null" >
+        order_no,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="recName != null" >
+        rec_name,
+      </if>
+      <if test="recAddr != null" >
+        rec_addr,
+      </if>
+      <if test="recPhone != null" >
+        rec_phone,
+      </if>
+      <if test="postAge != null" >
+        post_age,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="orderNo != null" >
+        #{orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="recName != null" >
+        #{recName,jdbcType=VARCHAR},
+      </if>
+      <if test="recAddr != null" >
+        #{recAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="recPhone != null" >
+        #{recPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="postAge != null" >
+        #{postAge,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=DOUBLE},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=DATE},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hzit.pojo.Order" >
+    update t_order
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="recName != null" >
+        rec_name = #{recName,jdbcType=VARCHAR},
+      </if>
+      <if test="recAddr != null" >
+        rec_addr = #{recAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="recPhone != null" >
+        rec_phone = #{recPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="postAge != null" >
+        post_age = #{postAge,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=DOUBLE},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=DATE},
+      </if>
+    </set>
+    where order_no = #{orderNo,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hzit.pojo.Order" >
+    update t_order
+    set user_id = #{userId,jdbcType=VARCHAR},
+      rec_name = #{recName,jdbcType=VARCHAR},
+      rec_addr = #{recAddr,jdbcType=VARCHAR},
+      rec_phone = #{recPhone,jdbcType=VARCHAR},
+      post_age = #{postAge,jdbcType=VARCHAR},
+      price = #{price,jdbcType=DOUBLE},
+      create_time = #{createTime,jdbcType=DATE}
+    where order_no = #{orderNo,jdbcType=VARCHAR}
+  </update>
+</mapper>
